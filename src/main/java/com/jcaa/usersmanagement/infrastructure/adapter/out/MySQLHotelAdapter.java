@@ -8,7 +8,6 @@ import java.util.List;
 public class MySQLHotelAdapter implements ConsultasHotelPort {
     private final String URL = "jdbc:mysql://localhost:3306/safaris_hotels_db";
     private final String USER = "root";
-
     private final String PASSWORD = System.getenv("DB_PASSWORD");
 
     private Connection conectar() throws SQLException {
@@ -21,7 +20,12 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
         String sql = "SELECT * FROM hotel";
         try (Connection conn = conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                lista.add(rs.getString("id") + " | " + rs.getString("nombre") + " - " + rs.getInt("categoria") + " Estrellas");
+                lista.add(rs.getString("id")+ "|" +
+                          rs.getString("nombre") + "|" +
+                          rs.getInt("categoria") + "|" +
+                          rs.getString("direccion") + "|" +
+                          rs.getString("telefono")+ "|" +
+                          rs.getString("director"));
             }
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
@@ -35,7 +39,10 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
             pstmt.setString(1, hotelId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                lista.add("Habitación " + rs.getString("numero") + " (" + rs.getString("tipo") + ") - $" + rs.getDouble("precio"));
+                lista.add(rs.getString("id")+ "|" +
+                          rs.getString("numero")+ "|" +
+                          rs.getString("tipo")+ "|" +
+                          rs.getDouble("precio"));
             }
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
@@ -49,7 +56,10 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
             pstmt.setString(1, clienteId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                lista.add("Reserva " + rs.getString("id") + " | Hab: " + rs.getString("habitacion_id") + " | Del " + rs.getDate("fecha_inicio") + " al " + rs.getDate("fecha_fin"));
+                lista.add(rs.getString("id")+ "|" +
+                          rs.getString("habitacion_id")+ "|" +
+                          rs.getDate("fecha_inicio")+ "|" +
+                          rs.getDate("fecha_fin"));
             }
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
@@ -63,7 +73,10 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
             pstmt.setString(1, clienteId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                lista.add("Reserva " + rs.getString("id") + " | Estado: " + rs.getString("estado") + " | Del " + rs.getDate("fecha_inicio") + " al " + rs.getDate("fecha_fin"));
+                lista.add(rs.getString("id")+ "|" +
+                          rs.getString("estado")+ "|" +
+                          rs.getDate("fecha_inicio")+ "|" +
+                          rs.getDate("fecha_fin"));
             }
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
@@ -81,7 +94,9 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
             pstmt.setString(1, hotelId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                lista.add("Estancia " + rs.getString("estancia_id") + " | Habitación " + rs.getString("numero") + " ocupada por el cliente " + rs.getString("cliente_id"));
+                lista.add(rs.getString("estancia_id")+ "|" +
+                          rs.getString("numero")+ "|" +
+                          rs.getString("cliente_id"));
             }
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
