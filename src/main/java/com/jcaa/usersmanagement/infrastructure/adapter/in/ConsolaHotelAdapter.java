@@ -28,11 +28,11 @@ public class ConsolaHotelAdapter {
             System.out.println("");
 
             switch (opcion) {
-                case 1 -> casosDeUso.ejecutarConsulta1();
-                case 2 -> casosDeUso.ejecutarConsulta5("H-001");
-                case 3 -> casosDeUso.ejecutarConsulta7("C-123");
-                case 4 -> casosDeUso.ejecutarConsulta8("C-123");
-                case 5 -> casosDeUso.ejecutarConsulta12("H-001");
+                case 1 -> casosDeUso.consultaHoteles();
+                case 2 -> casosDeUso.consultaHabitaciones("H-001");
+                case 3 -> casosDeUso.consultaReservasActivas("C-123");
+                case 4 -> casosDeUso.consultaHistorialReservas("C-123");
+                case 5 -> casosDeUso.consultaEstanciasActivas("H-001");
                 case 6 -> System.out.println("Cerrando sesión en Safari'S...");
                 default -> System.out.println("Opción inválida. Intente de nuevo.");
             }
