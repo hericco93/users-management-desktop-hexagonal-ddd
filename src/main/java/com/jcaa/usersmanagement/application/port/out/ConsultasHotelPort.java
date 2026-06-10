@@ -8,4 +8,5 @@ public interface ConsultasHotelPort {
     List<String> obtenerReservasActivasPorCliente(String clienteId);
     List<String> obtenerHistorialReservasCliente(String clienteId);
     List<String> consultarEstanciasActivas(String hotelId);
+    boolean existeCliente(String clienteId);
 }
