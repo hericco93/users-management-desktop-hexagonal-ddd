@@ -101,4 +101,17 @@ public class MySQLHotelAdapter implements ConsultasHotelPort {
         } catch (SQLException e) { System.out.println("Error BD: " + e.getMessage()); }
         return lista;
     }
+
+    @Override
+    public boolean existeCliente(String clienteId) {
+        String sql = "SELECT 1 FROM cliente WHERE id = ?";
+        try (Connection conn = conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, clienteId);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            System.out.println("Error BD: " + e.getMessage());
+            return false;
+        }
+    }
 }
